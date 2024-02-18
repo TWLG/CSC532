@@ -1,8 +1,8 @@
 import random
-import matplotlib.pyplot as plt
 import time
 from heap_sort import heap_sort
 from merge_sort import merge_sort
+import matplotlib.pyplot as plt
 
 def main():
     sizes = range(100, 10000, 500)
@@ -19,15 +19,15 @@ def main():
         end = time.perf_counter()
         heap_sort_times.append(end - start)
     
-    # Plot the times
     plt.plot(sizes, merge_sort_times, label='Merge Sort')
     plt.plot(sizes, heap_sort_times, label='Heap Sort')
     plt.xlabel('Size of Array')
     plt.ylabel('Execution Time (s)')
     plt.title('Execution Time of Merge Sort and Heap Sort Algorithms')
     plt.legend() 
-    # Save the plot as heap_vs_merge.png
-    # plt.savefig('heap_vs_merge.png')
+    # Save the plot as heap_vs_merge.png in "Homework 2"
+    #plt.savefig('Homework 2/heap_vs_merge.png')
+    
     plt.show()
     
    
