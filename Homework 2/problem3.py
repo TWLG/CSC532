@@ -16,6 +16,8 @@ def main():
 
     for size in tqdm(sizes):
         A = [random.randint(-1000, 1000) for i in range(size)]
+        #A = [i for i in range(size)]
+
         
         merge_sort_time = 0
         heap_sort_time = 0
@@ -56,9 +58,9 @@ def main():
     plt.legend() 
 
     # Save the plot in "Homework 2"
-    #plt.savefig('Homework 2/Quicksort_RPivot_Comparison.png')
+    plt.savefig('Homework 2/Quicksort_RPivot_Comparison_SortedLists.png')
     
-    #plt.show()
+    plt.show()
 
 
     
