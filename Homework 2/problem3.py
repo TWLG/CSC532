@@ -58,7 +58,7 @@ def main():
     plt.legend() 
 
     # Save the plot in "Homework 2"
-    plt.savefig('Homework 2/Quicksort_RPivot_Comparison_SortedLists.png')
+    #plt.savefig('Homework 2/Quicksort_RPivot_Comparison_SortedLists.png')
     
     plt.show()
 
