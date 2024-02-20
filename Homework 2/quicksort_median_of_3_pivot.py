@@ -1,3 +1,5 @@
+from quick_sort_rpivot import partition
+
 """
 FROM THE HW:
 
@@ -14,49 +16,25 @@ For instance, if our list is [5, 8, 2, 3, 4], we would take the median of 5, 4, 
 Then, to use the books partitioning algorithm, we would swap that value with whatever is at A[r] and proceed as normal.
 Implement this version of Quicksort and compare its performance with the other two versions of Quicksort on randomly-generated lists and completely sorted lists.  
 """
+def quicksort_median_pivot(array: list[int], pivot: int, rightmost: int):
+	assert isinstance(array, list), "Input must be a list"
 
-
-#! WIP this one isn't working properly yet
-def quicksort(m: list[int]):
-	assert isinstance(m, list), "Input must be a list"
-
-	length = len(m)
+	length = len(array)
     
 	if length < 2:
         # Any list with fewer than 2 elements is always considered sorted
-		return m
+		return array
 	
 	if length == 2:
-		left = m[0]
-		right = m[1]
+		left = array[0]
+		right = array[1]
 		if left > right:
-			m[1] = left
-			m[0] = right
+			array[1] = left
+			array[0] = right
 
-		return m
+		return array
 
-	rightmost = m[length - 1]
-
-	pivot_index = (length - 1) // 2
-	pivot = m[pivot_index]
-
-	#* swap that (pivot) value with whatever is at A[rightmost] and proceed as normal
-
-	#? Pivot value -> end index
-	m[length - 1] = pivot 
-	
-	#? Rightmost value -> pivot index
-	m[pivot_index] = rightmost
-
-	left_sub_array = m[0:pivot_index]
-	right_sub_array = m[pivot_index: length]
-
-	left_sorted = quicksort(left_sub_array)
-	right_sorted = quicksort(right_sub_array)
-
-	return left_sorted + right_sorted
-
-
-test = [5, 8, 2, 3, 4]
-print("Before: ", test)
-print("After: ", quicksort(test))
+	if pivot < rightmost:
+		result = partition(array, pivot, rightmost)
+		quicksort_median_pivot(array, pivot, result - 1)
+		quicksort_median_pivot(array, result + 1, rightmost)
