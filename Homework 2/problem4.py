@@ -1,7 +1,7 @@
 from merge_sort import merge_sort
 from heap_sort import heap_sort
 from quick_sort_rpivot import partition
-from random_pivot_quicksort import random_pivot_quicksort
+from random_pivot_quicksort import randomized_quicksort
 import time
 import matplotlib.pyplot as plt
 
@@ -32,7 +32,7 @@ def test_sorted_arrays(sizes):
         # Test Quicksort with randomly selected pivot
         quicksort_random_pivot = list(A)
         start_time = time.perf_counter()
-        random_pivot_quicksort(quicksort_random_pivot, 0, len(quicksort_random_pivot) - 1)
+        randomized_quicksort(quicksort_random_pivot, 0, len(quicksort_random_pivot) - 1)
         end_time = time.perf_counter()
         quicksort_random_pivot_times.append(end_time - start_time)
 
