@@ -1,46 +1,57 @@
 from merge_sort import merge_sort
 from heap_sort import heap_sort
-from quick_sort_rpivot import partition
 from random_pivot_quicksort import randomized_quicksort
 import time
+import random
+from tqdm import tqdm
 import matplotlib.pyplot as plt
 
+def main():
+    sizes = range(100, 10000, 500)
 
-def test_sorted_arrays(sizes):
     heap_sort_times = []
     merge_sort_times = []
     quicksort_random_pivot_times = []
 
-    for size in sizes:
-        # Generate already sorted array
-        A = list(range(size))
+    for size in tqdm(sizes):
+        #A = [random.randint(-1000, 1000) for i in range(size)]
+        A = [i for i in range(size)]
 
-        # Test Heap Sort
-        heap_sorted = list(A)
-        start_time = time.perf_counter()
-        heap_sort(heap_sorted)
-        end_time = time.perf_counter()
-        heap_sort_times.append(end_time - start_time)
+        
+        merge_sort_time = 0
+        heap_sort_time = 0
+        quick_sort_random_pivot_time = 0
 
-        # Test Merge Sort
-        merge_sorted = list(A)
-        start_time = time.perf_counter()
-        merge_sort(merge_sorted, 0, len(merge_sorted) - 1)
-        end_time = time.perf_counter()
-        merge_sort_times.append(end_time - start_time)
+        for _ in range(5):  # run each algorithm 5 times
+            # Generate already sorted array
+            
+            B = list(A)
+            start = time.perf_counter()
+            heap_sort(B)
+            end = time.perf_counter()
+            heap_sort_time += end - start
 
-        # Test Quicksort with randomly selected pivot
-        quicksort_random_pivot = list(A)
-        start_time = time.perf_counter()
-        randomized_quicksort(quicksort_random_pivot, 0, len(quicksort_random_pivot) - 1)
-        end_time = time.perf_counter()
-        quicksort_random_pivot_times.append(end_time - start_time)
+            # Test Merge Sort
+            B = list(A)
+            start = time.perf_counter()
+            merge_sort(B, 0, len(B) - 1)
+            end = time.perf_counter()
+            merge_sort_time += end - start
 
-    print(len(heap_sort_times), len(merge_sort_times), len(quicksort_random_pivot_times))
-    return heap_sort_times, merge_sort_times, quicksort_random_pivot_times
-
-
-def plot_sorted_arrays(sizes, heap_sort_times, merge_sort_times, quicksort_random_pivot_times):
+            # Test Quicksort with randomly selected pivot
+            B = list(A)
+            start = time.perf_counter()
+            randomized_quicksort(B, 0, len(B) - 1)
+            end = time.perf_counter()
+            quick_sort_random_pivot_time += end - start
+        
+        
+        # average time
+        merge_sort_times.append(merge_sort_time / 5)
+        heap_sort_times.append(heap_sort_time / 5)
+        quicksort_random_pivot_times.append(quick_sort_random_pivot_time / 5)
+        
+    
     plt.plot(sizes, heap_sort_times, label='Heap Sort')
     plt.plot(sizes, merge_sort_times, label='Merge Sort')
     plt.plot(sizes, quicksort_random_pivot_times, label='Quicksort Random Pivot')
@@ -49,9 +60,10 @@ def plot_sorted_arrays(sizes, heap_sort_times, merge_sort_times, quicksort_rando
     plt.title('Execution Time of Sorting Algorithms on Already Sorted Arrays')
     plt.legend()
     plt.grid(True)
+
+    # Save the plot in "Homework 2"
+    #plt.savefig('Homework 2/Random Pivot_SortedLists.png')
+    
     plt.show()
 
-# Test and plot
-sizes = range(100, 10000, 500)
-heap_sort_times, merge_sort_times, quicksort_random_pivot_times = test_sorted_arrays(sizes)
-plot_sorted_arrays(sizes, heap_sort_times, merge_sort_times, quicksort_random_pivot_times)
+main()

@@ -16,7 +16,8 @@ def main():
 
     for size in tqdm(sizes):
         A = [random.randint(-1000, 1000) for i in range(size)]
-        
+        #A = [i for i in range(size)]
+
         qs_random_pivot_time = 0
         qs_rpivot_time = 0
         qs_median_three_time = 0
@@ -30,10 +31,9 @@ def main():
             end = time.perf_counter()
             qs_random_pivot_time += end - start
 
-
             B = list(A)  
             start = time.perf_counter()
-            quicksort_rpivot(B, 0, len(B) - 1)
+            #quicksort_rpivot(B, 0, len(B) - 1)
             end = time.perf_counter()
             qs_rpivot_time += end - start
 
@@ -57,7 +57,7 @@ def main():
     plt.legend() 
 
     # Save the plot in "Homework 2"
-    #plt.savefig('Homework 2/Quicksort_RPivot_Comparison.png')
+    plt.savefig('Homework 2/Quicksort Comparisons.png')
     
     plt.show()
 
