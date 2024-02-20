@@ -16,7 +16,7 @@ def main():
 
     for size in tqdm(sizes):
         A = [random.randint(-1000, 1000) for i in range(size)]
-        #A = [i for i in range(size)]
+        A = [i for i in range(size)]
 
         
         merge_sort_time = 0
